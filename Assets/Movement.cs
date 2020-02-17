@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    float direction = 0.0f;
+    float directionX = 0.0f;
+    float directionY = 0.0f;
+    bool facedirection = false;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +17,8 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 position = transform.localPosition;
-        position.x += 1 * direction * Time.deltaTime;
+        position.x += 1 * directionX * Time.deltaTime;
+        position.z += 1 * directionY * Time.deltaTime;
         transform.localPosition = position;
     }
 
@@ -24,11 +27,40 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.RightArrow))
         {
-            direction = 1.0f;
+            directionX = 1.0f;
+            facedirection = true;
+            //if (!facedirection)
+            //{
+            //    gameObject.transform.Rotate(0.0f, 0.0f, 0.0f);
+            //    facedirection = true;
+            //}
         }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            directionX = -1.0f;
+            if (facedirection)
+            {
+                gameObject.transform.Rotate(0.0f, 180.0f, 0.0f);
+                facedirection = false;
+            }
+        }
+        else if (Input.GetKey(KeyCode.UpArrow))
+        {
+            directionY = 1.0f;
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            directionY = -1.0f;
+        } 
         else
         {
-            direction = 0.0f;
+            directionX = 0.0f;
+            directionY = 0.0f;
         }
+
+       // while(facedirection == true)
+       // {
+       //     gameObject.transform.Rotate(0.0f, 180.0f, 0.0f);
+       // }
     }
 }
