@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
 
     //Bool value to check whether a character is defeated or not
     //By default, they are not, therefore starting value is "false"
-    bool isDefeated = false;
+    //bool isDefeated = false;
 
 
     void Awake()
@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
         print("Health for " + gameObject.name + " was " + currentHealth);
 
         //Reduces character's health by damage taken
-        currentHealth = currentHealth - damageValue;
+        currentHealth -= damageValue;
 
         print("Current health for " + gameObject.name + " is " + currentHealth);
 
@@ -52,7 +52,7 @@ public class Health : MonoBehaviour
         print("Health for " + gameObject.name + " was " + currentHealth);
 
         //Reduces character's health by damage taken
-        currentHealth = currentHealth + healValue;
+        currentHealth += healValue;
 
         print("Current health for " + gameObject.name + " is " + currentHealth);
 

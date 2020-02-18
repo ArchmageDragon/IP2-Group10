@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 151735852}
   - component: {fileID: 151735849}
   m_Layer: 0
-  m_Name: heart
+  m_Name: MediHeart
   m_TagString: Medikit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
