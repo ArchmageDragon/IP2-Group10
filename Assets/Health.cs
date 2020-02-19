@@ -39,11 +39,9 @@ public class Health : MonoBehaviour
 
         //Checks whether character's health reached 0
         //If health reaches 0, character is defeated
-        if (currentHealth <= 0 
-            //&& !isDefeated
-            )
+        if (currentHealth <= 0)
         {
-            //characterDefeated();
+            CharacterDefeated();
         }
     }
 
@@ -58,12 +56,14 @@ public class Health : MonoBehaviour
 
     }
 
-    /*
+    
     void CharacterDefeated()
     {
-        //isDefeated = true;        
+        //isDefeated = true;    
+
+        gameObject.SetActive(false);
 
     }
-    */
+    
 
 }
