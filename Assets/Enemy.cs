@@ -9,11 +9,14 @@ public class Enemy : MonoBehaviour
 
     private Transform playerPosOne;
     private Transform playerPosTwo;
+    private Vector2 roamPos;
+    
+    
 
     float enemyOldX;
     float enemyNewX;
 
-    public float speed = 5.0f;
+    public float speed;
 
     public Rigidbody2D enemy;
 
@@ -50,37 +53,27 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+	//Roam();
+	//Move(false);
+	Move(true);
+
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
-
-        //float distanceOneX = Vector2.Distance(transform.position.x, playerPosOne.position.x);
-        float distanceOneZ = Mathf.Abs(transform.position.z - playerPosOne.position.z);
-        //print("XXXXXXX " + distanceOneZ);
-
-        //Finds the distance between the enemy and player 1
-        float distanceOne = Vector2.Distance(transform.position, playerPosOne.position);
-        //print("Distance One " + distanceOne);
-
-        //Finds the distance betwwen the enemy and player 2
-        float distanceTwo = Vector2.Distance(transform.position, playerPosTwo.position);    
-        //print("Distance Two " + distanceTwo);
-
-        if (distanceOne < distanceTwo && playerOne.activeSelf == true)  //if player one is closer to the enemy than player two
-        {
-            MoveTo(playerPosOne, playerOneHealth);  //Call MoveTo method; moves the enemy towards player 1
-        }
-
-        else if (distanceOne > distanceTwo && playerTwo.activeSelf == true) //if player 2 is closer
-        {
-            MoveTo(playerPosTwo, playerTwoHealth);  //Call MoveTo method; moves the enemy towards player 2
-        }
     }
 
     //Moves the enemy to the player that was determined to be closer
     //Target is the closest player character
     //********** Will likely need to adjust it once we start changing enemy behaviour! **********
-    void MoveTo(Transform target, Health_P playerHealth)
+    void MoveTo(Transform target, Health_P playerHealth, bool flee)
     {
         float dist = Vector2.Distance(transform.position, target.position);
+	if(flee)
+	{
+	speed = -0.75f;
+	}
+	else
+	{
+	speed = 0.75f;
+	}
 
         if (dist > 1.25f)
         {
@@ -125,5 +118,43 @@ public class Enemy : MonoBehaviour
             
         }    
     }
-     
+
+	void Roam()
+	{
+		
+		if(roamPos.Equals(transform.localPosition))
+		{
+			float roamX = Random.Range(-1,1);
+			float roamY = Random.Range(-1,1);
+
+			roamPos = transform.localPosition;
+			roamPos.x += roamX;
+			roamPos.y += roamY;
+				
+		}
+
+		transform.position = Vector2.MoveTowards(transform.position, roamPos, speed * Time.deltaTime);
+			
+	}
+
+	///void Flee()
+	//{
+		//Move(true);
+	//}
+	
+	void Move(bool run)
+	{
+		
+		float distanceOne = Vector2.Distance(transform.position, playerPosOne.position);
+		float distanceTwo = Vector2.Distance(transform.position, playerPosTwo.position);
+
+		if (distanceOne < distanceTwo && playerOne.activeSelf == true)  //if player one is closer to the enemy than player two
+        	{
+            		MoveTo(playerPosOne, playerOneHealth, run);  //Call MoveTo method; moves the enemy towards player 1
+        	}
+		else if (distanceOne > distanceTwo && playerTwo.activeSelf == true) //if player 2 is closer
+        	{
+            		MoveTo(playerPosTwo, playerTwoHealth, run);  //Call MoveTo method; moves the enemy towards player 2
+        	}
+	}
  }
