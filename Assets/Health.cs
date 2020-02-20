@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void DamageTaken(int damageValue)
@@ -39,11 +39,9 @@ public class Health : MonoBehaviour
 
         //Checks whether character's health reached 0
         //If health reaches 0, character is defeated
-        if (currentHealth <= 0 
-            //&& !isDefeated
-            )
+        if (currentHealth <= 0)
         {
-            //characterDefeated();
+            CharacterDefeated();
         }
     }
 
@@ -54,16 +52,23 @@ public class Health : MonoBehaviour
         //Reduces character's health by damage taken
         currentHealth += healValue;
 
+        if (currentHealth > startingHealth)
+        {
+            currentHealth = startingHealth;
+        }
+
         print("Current health for " + gameObject.name + " is " + currentHealth);
 
     }
 
-    /*
+    
     void CharacterDefeated()
     {
-        //isDefeated = true;        
+        //isDefeated = true;    
+
+        gameObject.SetActive(false);
 
     }
-    */
+    
 
 }

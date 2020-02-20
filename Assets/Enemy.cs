@@ -10,7 +10,14 @@ public class Enemy : MonoBehaviour
     private Transform playerPosOne;
     private Transform playerPosTwo;
 
+    float enemyOldX;
+    float enemyNewX;
+
     public float speed = 5.0f;
+
+    public Rigidbody2D enemy;
+
+    SpriteRenderer m_SpriteRenderer;
 
     //Base attack power of enemy
     public int atkPower = 1;
@@ -37,10 +44,14 @@ public class Enemy : MonoBehaviour
         playerPosOne = playerOne.transform;
         playerPosTwo = playerTwo.transform;
 
+        enemy = GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
     {
+        m_SpriteRenderer = GetComponent<SpriteRenderer>();
+
         //float distanceOneX = Vector2.Distance(transform.position.x, playerPosOne.position.x);
         float distanceOneZ = Mathf.Abs(transform.position.z - playerPosOne.position.z);
         //print("XXXXXXX " + distanceOneZ);
@@ -53,14 +64,28 @@ public class Enemy : MonoBehaviour
         float distanceTwo = Vector2.Distance(transform.position, playerPosTwo.position);    
         //print("Distance Two " + distanceTwo);
 
-        if (distanceOne < distanceTwo)  //if player one is closer to the enemy than player two
+        if (distanceOne < distanceTwo && playerOne.activeSelf == true)  //if player one is closer to the enemy than player two
         {
             MoveTo(playerPosOne, playerOneHealth);  //Call MoveTo method; moves the enemy towards player 1
         }
 
-        else //if player 2 is closer
+        else if (distanceOne > distanceTwo && playerTwo.activeSelf == true) //if player 2 is closer //distanceOne > distanceTwo && 
         {
             MoveTo(playerPosTwo, playerTwoHealth);  //Call MoveTo method; moves the enemy towards player 2
+        }
+
+        if (playerOne.activeSelf == false && playerTwo.activeSelf == false)
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();
+        }
+        else if (playerOne.activeSelf == false)
+        {
+            MoveTo(playerPosTwo, playerTwoHealth);
+        }
+        else if (playerTwo.activeSelf == false)
+        {
+            MoveTo(playerPosOne, playerOneHealth);
         }
     }
 
@@ -71,9 +96,34 @@ public class Enemy : MonoBehaviour
     {
         float dist = Vector2.Distance(transform.position, target.position);
 
-        if (dist > 1.25f)
+        if (dist > 1.4f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            //transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
+            //****** Store previous X position
+            enemyOldX = enemy.position.x;
+
+            enemy.MovePosition(Vector2.MoveTowards (transform.position, target.position, speed * Time.deltaTime) );
+
+            //****** Store new X position
+            enemyNewX = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime).x;
+
+            //****** Not very elegant way to flip the enemy sprites...
+            //print(enemyOldX);
+            //print(enemyNewX);
+            //
+            if (enemyOldX > enemyNewX)
+            {
+                //print("Business");
+                m_SpriteRenderer.flipX = false;
+            }
+            //
+            else if (enemyOldX < enemyNewX)
+            {
+                //print("As usual");
+                m_SpriteRenderer.flipX = true;
+            }
+            //****
 
             playerWasAttacked = false;
         }
@@ -89,5 +139,18 @@ public class Enemy : MonoBehaviour
             
         }    
     }
-     
- }
+
+   // void OnCollisionEnter2D (Collision other)
+   // {
+    //    if (gameObject.tag == "Enemy")
+    //    {
+    //        switch (other.gameObject.tag)
+    //        {
+               //case "Player":
+                //    playerOneHealth.DamageTaken(atkPower);
+
+     //           default:
+     //               break;
+     //       }
+     //   }
+}
