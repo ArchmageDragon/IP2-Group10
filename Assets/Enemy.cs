@@ -9,14 +9,21 @@ public class Enemy : MonoBehaviour
 
     private Transform playerPosOne;
     private Transform playerPosTwo;
+    private GameObject target;
+    private Vector2 randomRoamPos;
     private Vector2 roamPos;
-    
-    
+    private Vector2 behindPoint;
+    int roamCheck = 0;
+    int behindCheck = 0;
+    bool check = true;
+    bool leftRight;
+    int test = 0;
+
 
     float enemyOldX;
     float enemyNewX;
 
-    public float speed;
+    public float speed = 0.75f;
 
     public Rigidbody2D enemy;
 
@@ -39,6 +46,8 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+        
         playerOneHealth = playerOne.GetComponent<Health_P>();
         playerTwoHealth = playerTwo.GetComponent<Health_P>();
 
@@ -48,14 +57,42 @@ public class Enemy : MonoBehaviour
         playerPosTwo = playerTwo.transform;
 
         enemy = GetComponent<Rigidbody2D>();
-
+        
     }
 
     void Update()
     {
-	//Roam();
-	//Move(false);
-	Move(true);
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            test++;
+        }
+
+        switch(test)
+        {
+            case 0:
+                RandomRoam();
+                print("Random Roam");
+                break;
+            case 1:
+                Move(false);
+                print("Chase");
+                break;
+            case 2:
+                StartCoroutine(Roam());
+                print("Roam");
+                break;
+            case 3:
+                Behind();
+                print("Move Behind");
+                break;
+        }
+        //RandomRoam();
+        //Move(false);
+        //Move(true);
+        //StartCoroutine(Roam());
+        //Behind();
+        //StartCoroutine(MoveBehind(playerOne));
+        //MoveBehind(playerOne);
 
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -77,7 +114,7 @@ public class Enemy : MonoBehaviour
 
         if (dist > 1.25f)
         {
-            //transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
             //****** Store previous X position
             enemyOldX = enemy.position.x;
@@ -119,21 +156,21 @@ public class Enemy : MonoBehaviour
         }    
     }
 
-	void Roam()
+	void RandomRoam()
 	{
 		
-		if(roamPos.Equals(transform.localPosition))
+		if(randomRoamPos.Equals(transform.localPosition))
 		{
 			float roamX = Random.Range(-1,1);
 			float roamY = Random.Range(-1,1);
 
-			roamPos = transform.localPosition;
-			roamPos.x += roamX;
-			roamPos.y += roamY;
+			randomRoamPos = transform.localPosition;
+            randomRoamPos.x += roamX;
+            randomRoamPos.y += roamY;
 				
 		}
 
-		transform.position = Vector2.MoveTowards(transform.position, roamPos, speed * Time.deltaTime);
+		transform.position = Vector2.MoveTowards(transform.position, randomRoamPos, speed * Time.deltaTime);
 			
 	}
 
@@ -157,4 +194,205 @@ public class Enemy : MonoBehaviour
             		MoveTo(playerPosTwo, playerTwoHealth, run);  //Call MoveTo method; moves the enemy towards player 2
         	}
 	}
+
+    //void Roam()
+    //{
+    //    //set  new point 1 up and 1 back
+    //    //move enemy to new point
+    //    //set point 2 down
+    //    //move enemy to new point
+    //    //back to move method
+
+    //    float step = 0.1f * Time.deltaTime;
+    //    while (x <= 2)
+    //    {
+    //        if (check)
+    //        {
+    //            switch(x)
+    //            {
+    //                case 0:
+    //                    roamPos = transform.localPosition;
+    //                    roamPos.x += 1;
+    //                    roamPos.y += 1;
+    //                    check = false;
+    //                    print("1");
+    //                    break;
+    //                case 1:
+    //                    roamPos = transform.localPosition;
+    //                    roamPos.y -= 2;
+    //                    check = false;
+    //                    print("2");
+    //                    break;
+    //                default:
+    //                    break;
+    //            }
+    //        }
+            
+    //        if (roamPos.Equals(transform.localPosition))
+    //        {
+    //            //transform.position = Vector2.MoveTowards(transform.position, roamPos, speed * Time.deltaTime);
+                
+    //            x++;
+    //            check = true;
+    //            print("3");
+    //        }
+           
+    //            //x++;
+    //           // check = true;
+    //            transform.position = Vector2.MoveTowards(transform.position, roamPos, step);
+    //            //print("4");
+            
+    //    }
+    //}
+
+    public IEnumerator Roam()
+    {
+        while (roamCheck < 2)
+        {
+            if (check)
+            {
+                switch (roamCheck)
+                {
+                    case 0:
+                        roamPos = transform.localPosition;
+                        roamPos.x += 1;
+                        roamPos.y += 1;
+                        check = false;
+                        break;
+                    case 1:
+                        roamPos = transform.localPosition;
+                        roamPos.y -= 2;
+                        check = false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (roamPos.Equals(transform.localPosition))
+            {
+                //transform.position = Vector2.MoveTowards(transform.position, roamPos, speed * Time.deltaTime);
+
+                roamCheck++;
+                check = true;
+                print("3");
+            }
+
+            //x++;
+            // check = true;
+            transform.position = Vector2.MoveTowards(transform.position, roamPos, 0.1f * Time.deltaTime);
+            //print("4");
+
+            yield return null;
+        }
+    }
+
+    void Behind()
+    {
+        //determine a point behind the player based on what direction they are facing
+        //move stright up, then along behind the player and then straight down to the point
+        //go back into chase mode or just go to chase mode once behind the player and within a certain distance
+
+        float distanceOne = Vector2.Distance(transform.position, playerPosOne.position);
+        float distanceTwo = Vector2.Distance(transform.position, playerPosTwo.position);
+        // go for the closest player
+
+        if(distanceOne < distanceTwo && playerOne.activeSelf == true)
+        {
+            target = playerOne;
+        }
+        else if(distanceOne > distanceTwo && playerTwo.activeSelf == true)
+        {
+            target = playerTwo;
+        }
+
+        //need to determine if the enemy is already behind the player
+        //then we go back to move mode
+        //take the enemy position and the player position
+        // find out what side of the player the enemy is on
+        // then find out what side the player is facing
+        // if the player is facing the same side the enemy is on then move beghind them
+        //if not then the enemy is already behind them
+
+        float distanceA = Vector2.Distance(transform.position, new Vector2(100, 0));
+        float distanceB = Vector2.Distance(target.transform.position, new Vector2(100, 0));
+
+        // false for left true for right
+        if (distanceA < distanceB)
+        {
+            
+            leftRight = true;
+            print("Right");
+        }
+        else
+        {
+            leftRight = false;
+            print("Left");
+        }
+
+        // determine what way the player is facing
+        //true for right false for left
+        bool targetLeftRight = target.GetComponent<SpriteRenderer>().flipX;
+
+        if(leftRight == true && targetLeftRight == true)
+        {
+            print("Behind");
+            StartCoroutine(MoveBehind(target));
+        }
+        else if(leftRight == false && targetLeftRight == false)
+        {
+            print("Behind");
+            StartCoroutine(MoveBehind(target));
+        }
+        else
+        {
+            print("Front");
+        }
+    }
+
+    public IEnumerator MoveBehind(GameObject Target)
+    {
+        //find points to move the enemy behind the player
+        // once it runs it must keep going despite the pleyr changing direction
+        //
+        
+        print(behindPoint);
+
+        while (behindCheck < 3)
+        {
+            if (check)
+            {
+
+                switch (behindCheck)
+                {
+                    case 0:
+                        behindPoint.x = transform.position.x;
+                        behindPoint.y = Target.transform.position.y + 2;
+                        check = false;
+                        break;
+                    case 1:
+                        behindPoint.x = behindPoint.x + (Target.transform.position.x - transform.position.x) + (2 * (Target.transform.position.x - transform.position.x) / Mathf.Abs(Target.transform.position.x - transform.position.x));
+                        check = false;
+                        break;
+                    case 2:
+                        behindPoint.y = Target.transform.position.y;
+                        check = false;
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+
+            if (behindPoint.Equals(transform.localPosition))
+            {
+                behindCheck++;
+                check = true;
+            }
+
+            transform.position = Vector2.MoveTowards(transform.position, behindPoint, speed / 10 * Time.deltaTime);
+
+            yield return null;
+        }
+    }
  }
