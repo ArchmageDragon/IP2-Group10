@@ -11,7 +11,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F75F239B-6F3C-F79C-0B25-FEACEE0E2975}</ProjectGuid>
+    <ProjectGuid>{358C9898-46F7-A0CD-6ECD-F26EB14A4345}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,44 +63,46 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Enemy.cs" />
+    <Compile Include="Assets\GameHandler.cs" />
     <Compile Include="Assets\Health.cs" />
     <Compile Include="Assets\Health_E.cs" />
     <Compile Include="Assets\Health_P.cs" />
+    <Compile Include="Assets\HealthBar.cs" />
     <Compile Include="Assets\Medikit.cs" />
     <Compile Include="Assets\Movement.cs" />
     <Compile Include="Assets\ObjectPickup.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/SRITZ200/Documents/GitHub/IP2-Group10-Week4-REDUX-V1.1/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
