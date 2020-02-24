@@ -31,7 +31,8 @@ public class Enemy : MonoBehaviour
 
     //Boolean variable to check if enemy attacked the player
     //********** Just a test, so enemy won't kill player in milliseconds without moving
-    bool playerWasAttacked = false;
+    bool playerOneWasAttacked = false;
+    bool playerTwoWasAttacked = false;
 
     // Use this for initialization
     void Start()
@@ -74,6 +75,8 @@ public class Enemy : MonoBehaviour
             MoveTo(playerPosTwo, playerTwoHealth);  //Call MoveTo method; moves the enemy towards player 2
         }
 
+
+
         if (playerOne.activeSelf == false && playerTwo.activeSelf == false)
         {
             UnityEditor.EditorApplication.isPlaying = false;
@@ -87,6 +90,8 @@ public class Enemy : MonoBehaviour
         {
             MoveTo(playerPosOne, playerOneHealth);
         }
+
+        
     }
 
     //Moves the enemy to the player that was determined to be closer
@@ -96,7 +101,7 @@ public class Enemy : MonoBehaviour
     {
         float dist = Vector2.Distance(transform.position, target.position);
 
-        if (dist > 1.4f)
+        if (dist > 1.0f)
         {
             //transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
@@ -125,32 +130,63 @@ public class Enemy : MonoBehaviour
             }
             //****
 
-            playerWasAttacked = false;
+            //playerOneWasAttacked = false;
+            //playerTwoWasAttacked = false;
+
+            if (playerOneWasAttacked == true)
+            {
+                speed = -0.75f;
+                //float timePassed = 0;
+                // while (timePassed < 1)
+                //{
+                //    speed = -speed;
+                //   timePassed += Time.deltaTime;
+                //}    
+                //playerOneWasAttacked = false;
+                //speed = -speed;
+            }
+            else if (playerTwoWasAttacked == true)
+            {
+                float timePassed = 0;
+                while (timePassed < 1)
+                {
+                    speed = -speed;
+                    timePassed += Time.deltaTime;
+                }
+                playerTwoWasAttacked = false;
+                speed = -speed;
+            }
         }
 
         else
         {
-            if (!playerWasAttacked)
+          //  if (!playerWasAttacked)
             {
-                playerHealth.DamageTaken(atkPower);
+            //    playerHealth.DamageTaken(atkPower);
 
-                playerWasAttacked = true;
+             //   playerWasAttacked = true;
             }
             
         }    
     }
 
-   // void OnCollisionEnter2D (Collision other)
-   // {
-    //    if (gameObject.tag == "Enemy")
-    //    {
-    //        switch (other.gameObject.tag)
-    //        {
-               //case "Player":
-                //    playerOneHealth.DamageTaken(atkPower);
-
-     //           default:
-     //               break;
-     //       }
-     //   }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (gameObject.tag == "Enemy")
+        {
+            switch (other.gameObject.name)
+            {
+                case "PlayaBoi":
+                    playerOneHealth.DamageTaken(atkPower);
+                    playerOneWasAttacked = true;
+                    break;
+                case "PlayaGal":
+                    playerTwoHealth.DamageTaken(atkPower);
+                    playerTwoWasAttacked = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

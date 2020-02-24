@@ -30,7 +30,7 @@ public class Health : MonoBehaviour
 
     public void DamageTaken(int damageValue)
     {
-        print("Health for " + gameObject.name + " was " + currentHealth);
+       // print("Health for " + gameObject.name + " was " + currentHealth);
 
         //Reduces character's health by damage taken
         currentHealth -= damageValue;
