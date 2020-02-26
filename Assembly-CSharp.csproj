@@ -11,7 +11,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{358C9898-46F7-A0CD-6ECD-F26EB14A4345}</ProjectGuid>
+    <ProjectGuid>{3214EC75-5490-6F5E-CC78-200EF61C849E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -68,10 +68,15 @@
     <Compile Include="Assets\Health_E.cs" />
     <Compile Include="Assets\Health_P.cs" />
     <Compile Include="Assets\HealthBar.cs" />
+<<<<<<< Updated upstream
+=======
+    <Compile Include="Assets\MainMenu.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Assets\Medikit.cs" />
     <Compile Include="Assets\Movement.cs" />
     <Compile Include="Assets\ObjectPickup.cs" />
     <Reference Include="Unity.Timeline.Editor">
+<<<<<<< Updated upstream
       <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
@@ -103,6 +108,39 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+=======
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Users/lsteig200/Desktop/IP2-Group10-Week4-Healthbar_Prot/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+>>>>>>> Stashed changes
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
